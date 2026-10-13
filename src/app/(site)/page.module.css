@@ -1,0 +1,18 @@
+/* Rata kiri, sejajar dengan tepi tile di bawahnya; padding atas maks. 6rem */
+.intro {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: clamp(3.5rem, 10vh, 6rem) var(--gutter) clamp(2.5rem, 6vh, 4rem);
+  animation: reveal-up var(--duration-reveal) var(--ease) 150ms both;
+}
+
+.title {
+  font-size: var(--text-display);
+}
+
+.tagline {
+  max-width: 40ch;
+  margin-top: 1rem;
+  font-size: var(--text-lead);
+  color: var(--color-muted);
+}

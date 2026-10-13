@@ -1,0 +1,66 @@
+/*
+ * Track membentang selebar layar (full-bleed), tetapi kartu pertama sejajar
+ * dengan tepi kiri konten. Caranya: padding kiri-kanan = sisa ruang di luar
+ * --content-max, ditambah gutter.
+ */
+.track {
+  --rail-inset: max(var(--gutter), calc((100% - var(--content-max)) / 2 + var(--gutter)));
+
+  display: grid;
+  grid-auto-flow: column;
+  /*
+   * Lebar kartu: sepertiga ruang konten (3 kartu muat di desktop tanpa digeser),
+   * tetapi tidak lebih sempit dari 280px. Di ponsel, kartu selebar 82% layar
+   * sehingga ujung kartu berikutnya mengintip — tanda bahwa deretan bisa digeser.
+   */
+  grid-auto-columns: max(min(280px, 82vw), calc((100% - 2 * 1.25rem) / 3));
+  gap: 1.25rem;
+  padding: 0.75rem var(--rail-inset) 2rem; /* ruang atas-bawah agar bayangan kartu tidak terpotong */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--rail-inset);
+  scrollbar-width: none;
+}
+.track::-webkit-scrollbar {
+  display: none;
+}
+.track > * {
+  scroll-snap-align: start;
+}
+
+.controls {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.button {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-ink) 8%, transparent);
+  color: var(--color-ink);
+  transition:
+    background var(--duration-fast) var(--ease),
+    opacity var(--duration-fast) var(--ease);
+}
+.button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-ink) 14%, transparent);
+}
+.button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Di ponsel, geser dengan jari sudah cukup */
+@media (hover: none) {
+  .controls {
+    display: none;
+  }
+}

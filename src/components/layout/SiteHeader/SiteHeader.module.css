@@ -1,0 +1,144 @@
+/*
+ * Navbar ala bilah global apple.com: setinggi 44px, latar padat (tidak transparan,
+ * jadi tampilannya tidak berubah saat konten digulir di bawahnya), teks 12px
+ * yang tersebar rata dari logo hingga aksi paling kanan.
+ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--color-header-bg);
+  color: var(--color-header-ink);
+}
+
+.bar {
+  /* Lebar & jarak tepi bisa diatur halaman (mis. Mula Solusi) lewat --nav-max & --nav-gutter */
+  max-width: var(--nav-max, 1024px);
+  height: var(--header-height);
+  margin-inline: auto;
+  padding-inline: var(--nav-gutter, 22px);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+}
+
+/*
+ * Tata letak: logo | jarak lega | daftar brand (rapat, rata kiri) ........ Katalog · Hubungi
+ */
+.links {
+  display: flex;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+  margin-left: clamp(2rem, 6vw, 5rem); /* jarak antara logo DAWA dan daftar brand */
+}
+
+.link,
+.catalog,
+.contact {
+  display: block;
+  padding-block: 0.875rem; /* area klik setinggi navbar */
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: inherit;
+  transition: color var(--duration-fast) var(--ease);
+}
+.link:hover,
+.catalog:hover,
+.contact:hover,
+.link[aria-current="page"] {
+  color: var(--color-ink);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+  margin-left: auto; /* aksi menempel di kanan */
+}
+
+.toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+}
+
+.toggleBar {
+  position: absolute;
+  left: 13px;
+  width: 18px;
+  height: 1.5px;
+  background: var(--color-ink);
+  transition: transform 300ms var(--ease);
+}
+/*
+ * Garis dipilih lewat data-bar, bukan :nth-of-type: tombol juga berisi <span> teks
+ * untuk pembaca layar, sehingga urutan span tidak bisa diandalkan.
+ */
+.toggleBar[data-bar="top"] {
+  top: 18px;
+}
+.toggleBar[data-bar="bottom"] {
+  top: 25px;
+}
+.header[data-open="true"] .toggleBar[data-bar="top"] {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.header[data-open="true"] .toggleBar[data-bar="bottom"] {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+.sheet {
+  position: fixed;
+  inset: var(--header-height) 0 0 0;
+  padding: 1.5rem var(--gutter) env(safe-area-inset-bottom, 0px);
+  background: var(--color-bg);
+}
+.sheet[hidden] {
+  display: none;
+}
+
+.sheetLink {
+  display: block;
+  padding-block: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Tablet: tautan "Katalog" disembunyikan agar navbar tetap satu baris */
+@media (max-width: 1068px) {
+  .catalog {
+    display: none;
+  }
+}
+
+/* Ponsel: logo, Hubungi, [menu]; daftar brand pindah ke menu */
+@media (max-width: 734px) {
+  .links {
+    display: none;
+  }
+  .actions {
+    gap: 0.75rem;
+  }
+  .toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 735px) {
+  .sheet {
+    display: none;
+  }
+}

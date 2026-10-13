@@ -1,0 +1,81 @@
+.specs {
+  display: grid;
+  gap: 1rem;
+}
+
+.price {
+  font-size: var(--text-sm);
+}
+
+.amount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+/* Harga per varian: kotak kecil dua kolom (nominal tebal, label redup) */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column-reverse; /* markup: dt lalu dd; tampilan: nominal di atas label */
+  align-items: center;
+  padding: 0.625rem 0.5rem;
+  border-radius: 0.875rem;
+  background: var(--overlay-tile);
+  text-align: center;
+}
+.tile dd {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.tile dt {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+/* Daftar spesifikasi: label redup di kiri, nilai di kanan */
+.list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+.row dt {
+  color: var(--color-muted);
+}
+.row dd {
+  margin: 0;
+}
+
+/* Panel detail (lebih lega) */
+.specs[data-size="full"] {
+  gap: 1.5rem;
+}
+.specs[data-size="full"] .price {
+  font-size: var(--text-price);
+}
+.specs[data-size="full"] .list {
+  gap: 0.875rem;
+}
+.specs[data-size="full"] .row {
+  font-size: 0.9375rem;
+}
+.specs[data-size="full"] .tile dd {
+  font-size: var(--text-body);
+}

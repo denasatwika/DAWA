@@ -1,0 +1,66 @@
+/* Tombol halaman Mula Solusi (sesuai komponen Button di Figma) */
+.primary,
+.soft {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: var(--m-radius-pill);
+  font-family: var(--m-font);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Pil putih dengan cahaya lembut: aksi utama */
+.primary {
+  padding: 18px 22px 18px 28px;
+  background: var(--m-text);
+  color: var(--m-bg);
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: var(--m-glow-white);
+}
+.primary:hover {
+  transform: translateY(-2px);
+}
+.primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Pil timbul gelap: aksi kedua; saat ditekan berubah "masuk" (khas neumorphism) */
+.soft {
+  padding: 18px 28px 18px 24px;
+  background: var(--m-surface);
+  border: 1px solid var(--m-hairline);
+  color: var(--m-text);
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: var(--m-raised-sm);
+}
+.soft:hover {
+  transform: translateY(-2px);
+}
+.soft:active {
+  transform: none;
+  box-shadow: var(--m-inset-sm);
+}
+
+.sm {
+  padding: 12px 16px 12px 20px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+@media (max-width: 734px) {
+  .primary,
+  .soft {
+    padding: 14px 18px 14px 22px;
+    font-size: 15px;
+  }
+  .sm {
+    padding: 10px 14px 10px 16px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,134 @@
+.section {
+  max-width: calc(var(--m-container) + 2 * var(--m-gutter));
+  margin-inline: auto;
+  padding: 120px var(--m-gutter) 0;
+  scroll-margin-top: 64px;
+}
+
+/* Judul di kiri, filter di kanan, sejajar dasar */
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+/* Label pil: latar gelap, garis tepi tipis, huruf kapital putih berjarak lebar */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 9px 18px;
+  border-radius: var(--m-radius-pill);
+  background: #161618;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--m-text);
+}
+
+.headline {
+  max-width: 19ch; /* 2 baris di desktop, seperti di Figma */
+  font-family: var(--m-font);
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.muted {
+  color: var(--m-dim);
+}
+
+/* Filter: wadah "masuk", pilihan aktif berupa pil putih */
+.filters {
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border-radius: var(--m-radius-pill);
+  background: var(--m-well);
+  box-shadow: var(--m-inset-sm);
+}
+
+.filter {
+  padding: 10px 18px;
+  border-radius: var(--m-radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--m-muted);
+  white-space: nowrap;
+  transition:
+    color 200ms ease-out,
+    background-color 200ms ease-out;
+}
+.filter:hover {
+  color: var(--m-text);
+}
+.filter[aria-pressed="true"] {
+  background: var(--m-text);
+  color: var(--m-bg);
+  font-weight: 600;
+  box-shadow: var(--m-raised-sm);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+.item > * {
+  flex: 1;
+}
+
+@media (max-width: 1068px) {
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+/*
+ * Ponsel: 2 kolom. Kartu ini memuat badge, ringkasan, harga, dan tombol panah,
+ * sehingga 3 kolom (±105px per kartu) membuat teks tidak terbaca.
+ */
+@media (max-width: 734px) {
+  .section {
+    padding-top: 80px;
+  }
+  .head {
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .headline {
+    font-size: 30px;
+  }
+  .filters {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+  .filter {
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+  .grid {
+    gap: 14px 12px;
+  }
+}

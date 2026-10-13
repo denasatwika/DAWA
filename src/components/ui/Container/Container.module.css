@@ -1,0 +1,11 @@
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Lebar navbar & footer (lebih sempit dari konten, seperti apple.com) */
+.chrome {
+  max-width: var(--chrome-max);
+}

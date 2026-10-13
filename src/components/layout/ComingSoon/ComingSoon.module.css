@@ -1,0 +1,26 @@
+/* Mengisi hampir satu layar, isi tepat di tengah */
+.section {
+  min-height: calc(100svh - var(--header-height) - 12rem);
+  display: grid;
+  place-content: center;
+  gap: 0.5rem;
+  padding: 6rem var(--gutter);
+  text-align: center;
+  animation: reveal-up var(--duration-reveal) var(--ease-reveal) 100ms both;
+}
+
+.name {
+  font-size: 1.3125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--color-muted);
+}
+
+.message {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+}

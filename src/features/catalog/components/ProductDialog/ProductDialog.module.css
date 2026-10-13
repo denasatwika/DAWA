@@ -1,0 +1,111 @@
+/*
+ * Dialog detail produk: panel bersudut 2rem di atas latar gelap yang diburamkan.
+ * Desktop: foto di kiri, info di kanan. Ponsel: foto di atas, info di bawah.
+ */
+.dialog {
+  width: min(64rem, 100% - 2 * var(--gutter));
+  max-width: none;
+  max-height: min(92dvh, 52rem);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-frame);
+  background: var(--dialog-bg);
+  color: var(--color-ink);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.dialog:focus {
+  outline: none;
+}
+
+.dialog[open] {
+  animation: dialog-in 500ms var(--ease-out) both;
+}
+
+/* Latar fixed, jadi blur aman dipakai di sini */
+.dialog::backdrop {
+  background: rgb(0 0 0 / 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .dialog::backdrop {
+    background: rgb(0 0 0 / 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.98);
+  }
+}
+
+.panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: 0.75rem;
+}
+
+.media {
+  aspect-ratio: 4 / 5;
+  align-self: start;
+}
+
+.close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-ink) 10%, transparent);
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+.close:hover {
+  background: color-mix(in srgb, var(--color-ink) 18%, transparent);
+}
+.close:active {
+  transform: scale(0.94);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 3vw, 2.5rem) clamp(0.5rem, 2vw, 1.5rem) clamp(0.5rem, 2vw, 1.5rem) 0;
+}
+
+.name {
+  margin-bottom: 1.5rem;
+  padding-right: 3rem; /* ruang untuk tombol tutup */
+  font-size: var(--text-h3);
+  line-height: 1.15;
+}
+
+@media (max-width: 734px) {
+  .panel {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .media {
+    aspect-ratio: 4 / 3;
+  }
+  .info {
+    padding: 0 0.75rem 1rem;
+  }
+  .name {
+    padding-right: 0;
+  }
+}

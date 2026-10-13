@@ -1,0 +1,14 @@
+.notFound {
+  padding-block: 8rem;
+  text-align: center;
+}
+
+.title {
+  font-size: var(--text-h2);
+}
+
+.text {
+  margin: 1rem auto 2rem;
+  max-width: 48ch;
+  color: var(--color-muted);
+}

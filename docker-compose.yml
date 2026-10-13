@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      target: runtime
+    image: group-website:latest
+    ports:
+      - "8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: unless-stopped

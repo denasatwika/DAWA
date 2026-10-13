@@ -1,0 +1,178 @@
+/*
+ * Design tokens — satu-satunya tempat nilai visual didefinisikan.
+ * Komponen hanya boleh memakai variabel di bawah, bukan nilai mentah.
+ *
+ * Palet netral "stone" dan font Geist mengikuti referensi Floria
+ * (https://floria-landing-page.vercel.app/).
+ *
+ * Breakpoint (tidak bisa dijadikan variabel CSS, jadi dicatat di sini):
+ *   mobile  ≤ 734px   ·   tablet 735–1068px   ·   desktop ≥ 1069px
+ */
+:root {
+  /* Warna dasar halaman (tema terang) */
+  --color-bg: #fafaf9;
+  --color-surface: #f5f5f4;
+  --color-ink: #1c1917;
+  --color-muted: #6b6661; /* stone; >= 5:1 di atas #f5f5f4 */
+  --color-line: #e7e5e4;
+  --color-on-dark: #fafaf9; /* teks di atas permukaan gelap, tidak ikut berubah */
+  --color-on-light: #1c1917; /* teks di atas permukaan terang, tidak ikut berubah */
+  /* Navbar ala apple.com: latar padat (tidak berubah saat digulir) & teks 80% */
+  --color-header-bg: #f5f5f4;
+  --color-header-ink: rgb(28 25 23 / 0.8);
+
+  /* Warna brand; ditimpa per halaman lewat atribut style di src/app/[brand]/page.tsx */
+  --brand-accent: var(--color-ink);
+
+  /* Tipografi: Geist (dimuat lewat @fontsource-variable/geist di layout.tsx) */
+  --font-body: "Geist Variable", "Geist", -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-body);
+  /*
+   * Font hero ala apple.com: SF Pro Display. Tidak di-host sendiri (lisensi Apple melarang);
+   * perangkat Apple memakai font sistemnya, perangkat lain jatuh ke Geist.
+   */
+  --font-hero: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Geist Variable", sans-serif;
+  --tracking-tight: -0.025em;
+
+  --text-display: clamp(3rem, 7vw, 5.5rem);
+  --text-hero: clamp(2.5rem, 5.6vw, 4.75rem);
+  --text-h2: clamp(2.25rem, 4vw, 3rem); /* 36px -> 48px */
+  --text-h3: clamp(1.5rem, 2.4vw, 1.875rem);
+  --text-lead: clamp(1.125rem, 1.6vw, 1.375rem);
+  --text-product: 1.25rem; /* 20px, nama produk */
+  --text-price: 1.125rem; /* 18px, harga */
+  --text-body: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.8125rem;
+
+  /* Layout */
+  --header-height: 44px;
+  --chrome-max: 1200px;
+  --content-max: 1280px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --space-section: clamp(6rem, 11vw, 8rem);
+
+  /*
+   * Bentuk. Satu aturan sudut untuk seluruh situs:
+   *   - elemen interaktif (tombol, filter, kontrol) .... pil / lingkaran penuh
+   *   - wadah besar (bingkai video, tile, foto produk, dialog) .. 2rem
+   */
+  --radius-frame: 2rem;
+  --radius-pill: 999px;
+
+  /* Panggung foto produk (gradasi gelap yang "atmosferik"; ikon jika foto belum ada) */
+  --stage-from: #e7e5e4;
+  --stage-to: #d6d3d1;
+  --stage-ink: #6b6661;
+
+  /* Gerak */
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-fast: 200ms;
+  --duration-reveal: 1400ms;
+  /* Kurva gerak animasi kemunculan ala apple.com: cepat di awal, mendarat sangat halus */
+  --ease-reveal: cubic-bezier(0.28, 0.11, 0.32, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Lapisan (satu-satunya skala z-index) */
+  --z-header: 50;
+  --z-skip-link: 100;
+}
+
+/*
+ * Halaman tanpa tema brand (beranda, 404) mengikuti preferensi sistem.
+ * Halaman brand menetapkan temanya sendiri lewat [data-theme].
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not(:has([data-theme])) {
+    color-scheme: dark;
+    --color-bg: #000000;
+    --color-surface: #141414;
+    --color-ink: #fafaf9;
+    --color-muted: #a3a3a3; /* abu netral, tanpa rona coklat */
+    --color-line: #262626;
+    --color-header-bg: #161617;
+    --color-header-ink: rgb(255 255 255 / 0.8);
+  }
+}
+
+/*
+ * Tema gelap untuk "bingkai" halaman: header, footer, dan latar <body>.
+ * Aktif otomatis jika halaman berisi elemen [data-theme="dark"] (src/app/[brand]/page.tsx).
+ */
+:root:has([data-theme="dark"]) {
+  color-scheme: dark;
+  --color-bg: #000000;
+  --color-surface: #141414;
+  --color-ink: #fafaf9;
+  --color-muted: #a3a3a3; /* abu netral, tanpa rona coklat */
+  --color-line: #262626;
+  --color-header-bg: #161617;
+  --color-header-ink: rgb(255 255 255 / 0.8);
+}
+
+/*
+ * ─── Permukaan section (surface) ───────────────────────────────────────────
+ * Setiap section memilih satu permukaan lewat atribut data-surface. Atribut ini
+ * MENIMPA token warna hanya di dalam section itu, sehingga semua komponen di
+ * dalamnya (judul, teks, kartu) otomatis menyesuaikan tanpa diubah satu per satu.
+ *
+ *   black    #000000  hero & video. Sengaja hitam murni: latar video hero juga #000000,
+ *                     jadi off-black akan memunculkan tepi bingkai video yang terlihat.
+ *   night    #000000  katalog gelap (Mula Solusi): hitam netral, menyambung dengan hero
+ *   graphite #141414  section gelap kedua
+ *   light    #f5f5f4  katalog terang
+ *   white    #fafaf9  konten pendukung
+ *
+ * Teks aksen & sorotan juga dihitung ulang per permukaan agar selalu terbaca:
+ * di permukaan gelap dibuat lebih terang, di permukaan terang dibuat lebih gelap.
+ */
+[data-surface] {
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+[data-surface="black"],
+[data-surface="night"],
+[data-surface="graphite"] {
+  --color-ink: #fafaf9;
+  --color-muted: #a3a3a3; /* abu netral, tanpa rona coklat */
+  --color-line: #262626;
+  --accent-text: color-mix(in oklch, var(--brand-accent) 55%, white);
+  --highlight-text: var(--brand-highlight, var(--accent-text));
+  --stage-from: #1f1f1f;
+  --stage-to: #0a0a0a;
+  --stage-ink: #a3a3a3;
+  --dialog-bg: #141414;
+  /* Panel spesifikasi yang muncul di atas foto saat kartu di-hover */
+  --overlay-bg: rgb(14 14 14 / 0.84);
+  --overlay-edge: rgb(255 255 255 / 0.08);
+  --overlay-tile: rgb(255 255 255 / 0.06);
+}
+[data-surface="black"] {
+  --color-bg: #000000;
+}
+[data-surface="night"] {
+  --color-bg: #000000;
+}
+[data-surface="graphite"] {
+  --color-bg: #141414;
+}
+
+[data-surface="light"],
+[data-surface="white"] {
+  --color-ink: #1c1917;
+  --color-muted: #6b6661;
+  --color-line: #e7e5e4;
+  --accent-text: var(--brand-accent);
+  --highlight-text: color-mix(in oklch, var(--brand-highlight, var(--brand-accent)) 80%, black);
+  --dialog-bg: #fafaf9;
+  --overlay-bg: rgb(250 250 249 / 0.9);
+  --overlay-edge: rgb(28 25 23 / 0.08);
+  --overlay-tile: rgb(28 25 23 / 0.05);
+}
+[data-surface="light"] {
+  --color-bg: #f5f5f4;
+}
+[data-surface="white"] {
+  --color-bg: #fafaf9;
+}

@@ -1,0 +1,52 @@
+/* Tombol filter berbentuk pil; yang aktif berwarna terbalik (isi penuh) */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.filter {
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-muted);
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+
+.filter:active {
+  transform: scale(0.98);
+}
+
+.filter:hover {
+  color: var(--color-ink);
+  border-color: color-mix(in srgb, var(--color-ink) 40%, transparent);
+}
+
+.filter[aria-pressed="true"] {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-bg);
+}
+
+/*
+ * Grid kartu seragam, 3 kolom di semua ukuran layar (termasuk ponsel),
+ * supaya kartu tidak menjadi terlalu besar di layar kecil.
+ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2.5rem, 4vw, 3.5rem) clamp(1rem, 2vw, 1.5rem);
+}
+
+@media (max-width: 734px) {
+  .grid {
+    gap: 1.25rem 0.5rem;
+  }
+}

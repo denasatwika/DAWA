@@ -1,0 +1,8 @@
+.related {
+  padding-block: var(--space-section);
+}
+
+.relatedTitle {
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  font-size: var(--text-h2);
+}

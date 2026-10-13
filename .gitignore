@@ -1,0 +1,16 @@
+# dependencies
+node_modules
+
+# build output
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+
+# env & os
+.env*.local
+.DS_Store
+
+# media mentah (simpan master di storage terpisah, bukan di git)
+*.mov
+media-source/

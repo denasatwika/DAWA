@@ -1,0 +1,207 @@
+/*
+ * Kartu galeri + panel spesifikasi saat hover:
+ *
+ *   ╭──────────────────────╮
+ *   │ ╭──────────────────╮ │  panel gelap semi-transparan naik di dalam bingkai foto,
+ *   │ │ Spesifikasi      │ │  berjarak dari tepi (tidak menutup penuh)
+ *   │ │ Label    Nilai   │ │
+ *   │ ╰──────────────────╯ │
+ *   ╰──────────────────────╯
+ *   Nama produk
+ *   Mulai dari Rp 8.000
+ *
+ * Semua kartu berukuran sama: foto 1:1 dan nama selalu menyisakan ruang 2 baris.
+ */
+.card {
+  position: relative;
+  --frame-radius: var(--radius-frame);
+  --overlay-inset: 0.75rem;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border-radius: var(--frame-radius);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transition: transform 700ms var(--ease-out);
+}
+
+/* Panel spesifikasi: tersembunyi sampai kartu di-hover atau difokus keyboard */
+.overlay {
+  position: absolute;
+  inset: var(--overlay-inset);
+  z-index: 3; /* di atas tombol yang direntangkan, agar panel bisa di-scroll */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.25rem;
+  border-radius: calc(var(--frame-radius) - var(--overlay-inset));
+  background: var(--overlay-bg);
+  box-shadow: inset 0 0 0 1px var(--overlay-edge);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  color: var(--color-ink);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 500ms var(--ease-out),
+    visibility 0s linear 500ms;
+  scrollbar-width: thin;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .overlay {
+    background: var(--color-bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.overlayTitle {
+  margin-bottom: 0.875rem;
+  font-family: var(--font-display);
+  font-size: var(--text-price);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Hanya perangkat dengan kursor (hover) yang memakai panel di atas foto */
+@media (hover: hover) and (min-width: 735px) {
+  .card:hover .overlay,
+  .card:focus-within .overlay {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 400ms var(--ease-out),
+      transform 500ms var(--ease-out),
+      visibility 0s;
+  }
+  .card:hover .media {
+    transform: scale(1.05);
+  }
+}
+
+.name {
+  /* Selalu setinggi tepat 2 baris agar semua kartu sama tinggi */
+  height: calc(2 * 1.3em);
+  font-size: var(--text-product);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Tombol di nama diperluas menutupi kartu ("stretched link") */
+.open {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+/* Nama dipotong maksimal 2 baris (line-clamp tidak berlaku langsung pada <button>) */
+.label {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: var(--frame-radius);
+}
+.open:focus-visible {
+  outline: none;
+}
+.open:focus-visible::after {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+}
+
+/* Nama di kiri, harga di kanan (seperti galeri Floria) */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+}
+
+.price {
+  display: grid;
+  justify-items: end;
+  flex-shrink: 0;
+  max-width: 45%;
+  font-size: var(--text-price);
+  line-height: 1.3;
+  text-align: right;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.from {
+  font-size: 0.75rem;
+}
+
+.amount {
+  white-space: nowrap;
+}
+
+.card:active .frame {
+  transform: scale(0.98);
+}
+
+/* Ponsel: 3 kolom kecil, teks dan sudut ikut mengecil; panel hover tidak dipakai */
+@media (max-width: 734px) {
+  .card {
+    --frame-radius: 1rem;
+  }
+  .frame {
+    margin-bottom: 0.5rem;
+  }
+  .overlay {
+    display: none;
+  }
+  .name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+  /*
+   * Kartu terlalu sempit untuk nama & harga berdampingan: harga turun ke bawah nama.
+   * Area harga selalu setinggi 2 baris ("Mulai dari" + nominal) agar kartu sama tinggi.
+   */
+  .meta {
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+  .name {
+    flex: none;
+    width: 100%;
+  }
+  .price {
+    justify-items: start;
+    max-width: none;
+    min-height: calc(2 * 1.35em);
+    font-size: 0.6875rem;
+    line-height: 1.35;
+    text-align: left;
+  }
+  .from {
+    font-size: inherit;
+  }
+}

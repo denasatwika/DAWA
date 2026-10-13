@@ -1,0 +1,8 @@
+.next
+out
+node_modules
+package-lock.json
+public
+
+# Skill agen pihak ketiga (dipasang lewat `npx skills add`)
+.agents/

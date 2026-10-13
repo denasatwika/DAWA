@@ -1,0 +1,67 @@
+/*
+ * Token desain halaman Mula Solusi (diambil dari Figma, lihat panduan slicing).
+ * Semua token dibatasi di dalam .shell, jadi halaman brand lain tidak terpengaruh.
+ */
+.shell {
+  /* Warna */
+  --m-bg: #0b0b0d;
+  --m-surface-1: #18181b;
+  --m-surface-2: #0f0f11;
+  --m-well: #0c0c0e;
+  --m-text: #f5f5f7;
+  --m-muted: #8a8a92; /* >= 5:1 di atas latar; dipakai juga untuk label kecil */
+  --m-dim: #6a6a72; /* hanya untuk teks besar (judul), >= 3:1 */
+  --m-hairline: rgb(255 255 255 / 0.06);
+  --m-badge-text: #c9c9cf;
+
+  /* Bentuk */
+  --m-radius-card: 28px;
+  --m-radius-well: 20px;
+  --m-radius-pill: 999px;
+
+  /* Neumorphism: bayangan gelap kanan-bawah + sorotan putih tipis kiri-atas */
+  --m-raised: 12px 12px 30px rgb(0 0 0 / 0.8), -10px -10px 30px rgb(255 255 255 / 0.05);
+  --m-raised-sm: 4px 4px 10px rgb(0 0 0 / 0.8), -3px -3px 10px rgb(255 255 255 / 0.05);
+  --m-inset: inset 8px 8px 18px rgb(0 0 0 / 0.85), inset -6px -6px 18px rgb(255 255 255 / 0.06);
+  --m-inset-sm: inset 3px 3px 8px rgb(0 0 0 / 0.85), inset -2px -2px 8px rgb(255 255 255 / 0.05);
+  --m-glow-white: 0 12px 40px rgb(255 255 255 / 0.14);
+  --m-surface: linear-gradient(145deg, var(--m-surface-1), var(--m-surface-2));
+
+  /* Tipografi: Manrope (di-host sendiri lewat @fontsource) */
+  --m-font: "Manrope Variable", "Manrope", system-ui, sans-serif;
+  --m-container: 1200px;
+  --m-gutter: 24px;
+
+  /* Navbar situs mengikuti batas kiri-kanan konten halaman ini */
+  --nav-max: calc(var(--m-container) + 2 * var(--m-gutter));
+  --nav-gutter: var(--m-gutter);
+
+  /* Token situs yang dipakai komponen bersama (dialog spesifikasi) */
+  --font-body: var(--m-font);
+  --font-display: var(--m-font);
+  --color-bg: var(--m-bg);
+  --color-ink: var(--m-text);
+  --color-muted: var(--m-muted);
+  --color-line: rgb(255 255 255 / 0.08);
+  --dialog-bg: #141416;
+  --overlay-tile: rgb(255 255 255 / 0.05);
+  --stage-from: #1c1c1f;
+  --stage-to: #0c0c0e;
+  --stage-ink: var(--m-muted);
+  --radius-frame: var(--m-radius-card);
+
+  min-height: 100dvh;
+  background: var(--m-bg);
+  color: var(--m-text);
+  font-family: var(--m-font);
+  overflow-x: clip;
+}
+
+/* Layar sempit: bayangan neumorphic 30px terlalu berat, diperkecil */
+@media (max-width: 734px) {
+  .shell {
+    --m-raised: 6px 6px 16px rgb(0 0 0 / 0.8), -5px -5px 16px rgb(255 255 255 / 0.045);
+    --m-inset: inset 5px 5px 12px rgb(0 0 0 / 0.85), inset -4px -4px 12px rgb(255 255 255 / 0.05);
+    --m-gutter: 16px;
+  }
+}

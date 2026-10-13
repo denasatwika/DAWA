@@ -1,0 +1,60 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    opacity var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+
+/* Umpan balik saat ditekan, seperti tombol fisik */
+.button:active {
+  transform: scale(0.98);
+}
+
+/* Ukuran */
+.md {
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.4rem;
+}
+.sm {
+  font-size: 0.75rem;
+  padding: 0.4rem 0.9rem;
+}
+
+/* Varian */
+/* Mengikuti tema: gelap di halaman terang, terang di halaman gelap */
+.solid {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+/* Selalu putih; untuk dipakai di atas foto atau video gelap */
+.inverse {
+  background: var(--color-on-dark);
+  color: var(--color-on-light);
+}
+.accent {
+  /* Digelapkan 8% agar teks terang tetap >= 4.5:1 pada aksen yang cerah (mis. biru Mula Solusi) */
+  background: color-mix(in srgb, var(--brand-accent) 92%, black);
+  color: var(--color-on-dark);
+}
+.solid:hover,
+.inverse:hover,
+.accent:hover {
+  opacity: 0.86;
+}
+
+.link {
+  padding-inline: 0;
+  border-radius: 0;
+  font-weight: 500;
+  color: inherit;
+  text-underline-offset: 4px;
+}
+.link:hover {
+  text-decoration: underline;
+}

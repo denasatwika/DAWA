@@ -1,0 +1,22 @@
+/* Section selebar layar; warna latarnya diatur oleh atribut data-surface */
+.catalog {
+  padding-block: var(--space-section);
+}
+
+/* Judul tebal rata kiri, deskripsi redup di bawahnya (gaya Floria) */
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+  font-size: var(--text-h2);
+  line-height: 1.1;
+}
+
+.intro {
+  max-width: 40ch;
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--color-muted);
+}

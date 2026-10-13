@@ -1,0 +1,27 @@
+/*
+ * Keadaan awal "tersembunyi" hanya berlaku jika JavaScript aktif.
+ * Tanpa JavaScript, elemen langsung terlihat — konten tidak pernah hilang.
+ */
+@media (scripting: enabled) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+      opacity 1s var(--ease-reveal),
+      transform 1s var(--ease-reveal);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal[data-shown] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Pengguna "kurangi gerakan": tanpa pergeseran dan tanpa jeda */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transform: none;
+    transition-delay: 0ms;
+  }
+}
