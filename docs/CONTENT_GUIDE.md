@@ -46,9 +46,27 @@ price: {
 },
 ```
 
-Foto produk disimpan di `public/media/brands/<slug>/products/` dalam format WebP, lebar sekitar
-1200 px. Kartu memotong foto ke rasio 3:4, 1:1, atau 4:5 secara bergiliran (4:3 di ponsel),
-jadi letakkan produk di tengah dengan ruang kosong yang cukup di sekelilingnya.
+### Menambah atau mengganti foto produk
+
+Jangan menaruh foto berukuran besar langsung di `public/`. Foto 2 MB per produk membuat katalog
+lambat dimuat, terutama di jaringan seluler. Alurnya:
+
+1. Simpan foto **asli** (kualitas penuh, `.webp`/`.png`/`.jpg`) di
+   `media-source/products/<slug>/`, mis. `media-source/products/mula-solusi/mixer.webp`.
+2. Jalankan:
+
+   ```bash
+   npm run media:products -- mula-solusi
+   ```
+
+   Skrip memperkecil foto ke lebar maks. 1200 px dan mengompresnya (±2 MB → ±20-80 KB),
+   lalu menulis hasilnya ke `public/media/brands/<slug>/products/` dengan nama file yang sama
+   (berakhiran `.webp`).
+
+3. Isi `image.file` di file brand dengan nama file tersebut, lalu `npm run build`.
+
+Letakkan produk di tengah foto dengan ruang kosong yang cukup di sekelilingnya, karena kartu
+memotong foto mengikuti bentuk bingkainya.
 
 Gaya foto untuk katalog gelap (Mula Solusi): latar gelap bertekstur (abu arang, biru malam, atau
 hijau tua), cahaya samping yang lembut, produk sebagai satu-satunya objek. Hindari latar putih

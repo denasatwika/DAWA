@@ -17,7 +17,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check": "npm run typecheck && npm run lint && npm run format:check && npm run test",
-    "media:hero": "bash scripts/prepare-hero.sh"
+    "media:hero": "bash scripts/prepare-hero.sh",
+    "media:products": "bash scripts/prepare-products.sh"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
