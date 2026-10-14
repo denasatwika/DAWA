@@ -1,0 +1,43 @@
+/* Kartu melayang di bawah layar ponsel, tidak menghalangi katalog di atasnya */
+.hint {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 20px;
+  background: #1c1c1f;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  box-shadow: 0 20px 48px -12px rgb(0 0 0 / 0.7);
+  color: var(--m-text, #f5f5f7);
+  animation: hint-in 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.text {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.button {
+  justify-self: stretch;
+  min-height: 44px;
+  border-radius: 999px;
+  background: var(--m-text, #f5f5f7);
+  color: var(--m-bg, #0b0b0d);
+  font-size: 15px;
+  font-weight: 700;
+  transition: transform 200ms ease-out;
+}
+.button:active {
+  transform: scale(0.98);
+}
+
+@keyframes hint-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}

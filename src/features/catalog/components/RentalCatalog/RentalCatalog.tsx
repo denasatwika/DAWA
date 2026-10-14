@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Reveal } from "@/components/ui";
 import type { BrandSlug, Product, ProductCategory } from "@/content/schema";
 import { ProductDialog } from "../ProductDialog";
 import { RentalCard } from "../RentalCard";
+import { TapHint } from "../TapHint";
 import styles from "./RentalCatalog.module.css";
 
 const ALL = "semua";
@@ -31,6 +32,7 @@ export function RentalCatalog({
 }: RentalCatalogProps) {
   const [active, setActive] = useState(ALL);
   const [selected, setSelected] = useState<Product | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const filters = [{ id: ALL, name: "Semua" }, ...categories];
   const items = categories
@@ -71,7 +73,7 @@ export function RentalCatalog({
         {items.length} produk ditampilkan
       </p>
 
-      <div className={styles.grid}>
+      <div ref={gridRef} className={styles.grid}>
         {items.map(({ product, categoryName }, index) => (
           <Reveal key={`${active}-${product.id}`} delay={(index % 3) * 90} className={styles.item}>
             <RentalCard
@@ -83,6 +85,11 @@ export function RentalCatalog({
           </Reveal>
         ))}
       </div>
+
+      <TapHint
+        targetRef={gridRef}
+        message="Klik salah satu produk untuk melihat detail spesifikasinya."
+      />
 
       {selected && (
         <ProductDialog

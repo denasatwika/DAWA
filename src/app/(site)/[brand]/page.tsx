@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ComingSoon } from "@/components/layout";
-import { Container } from "@/components/ui";
+import { Container, FrameSequenceHero } from "@/components/ui";
 import { getHeroMedia } from "@/config/media";
 import { getBrand, getBrandSlugs, getBrands } from "@/content";
+import { rentalekLanding } from "@/content/landing/rentalek";
 import { getHeroMediaAvailability, withExistingProductImages } from "@/lib/media-files";
 import { BrandHero, BrandShowcase } from "@/features/brand";
 import { ProductCatalog } from "@/features/catalog";
@@ -44,7 +45,26 @@ export async function generateMetadata({ params }: BrandPageProps): Promise<Meta
 export default async function BrandPage({ params }: BrandPageProps) {
   const brand = getBrand((await params).brand);
   if (!brand) notFound();
-  if (brand.comingSoon) return <ComingSoon name={brand.name} />;
+  if (brand.comingSoon) {
+    // Rentalek sudah punya hero animasi; katalognya belum dibuka
+    if (brand.slug === "rentalek") {
+      const { hero } = rentalekLanding;
+      return (
+        <div data-brand={brand.slug} style={{ "--brand-accent": brand.accentColor }}>
+          <FrameSequenceHero
+            frames={hero.frames}
+            background={hero.background}
+            scrollHeight={hero.scrollHeight}
+            title={brand.name}
+            subtitle={brand.hero.tagline}
+            steps={hero.steps}
+          />
+          <ComingSoon name={brand.name} headingLevel="h2" />
+        </div>
+      );
+    }
+    return <ComingSoon name={brand.name} />;
+  }
 
   const otherBrands = getBrands().filter((b) => b.slug !== brand.slug);
 
