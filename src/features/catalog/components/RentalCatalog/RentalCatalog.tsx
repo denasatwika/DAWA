@@ -88,7 +88,7 @@ export function RentalCatalog({
 
       <TapHint
         targetRef={gridRef}
-        message="Klik salah satu produk untuk melihat detail spesifikasinya."
+        message="Klik salah satu unit untuk melihat detail spesifikasinya."
       />
 
       {selected && (
