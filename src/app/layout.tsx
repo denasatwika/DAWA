@@ -32,7 +32,9 @@ export const viewport: Viewport = {
  */
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="id">
+    // data-scroll-behavior: Next.js mematikan gulir halus sementara saat berpindah halaman,
+    // agar halaman baru langsung mulai dari atas (tanpa animasi meluncur).
+    <html lang="id" data-scroll-behavior="smooth">
       <body>
         <a href={`#${SECTION_ID.main}`} className="skip-link">
           Lewati ke konten

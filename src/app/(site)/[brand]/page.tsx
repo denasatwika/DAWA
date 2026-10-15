@@ -46,8 +46,8 @@ export default async function BrandPage({ params }: BrandPageProps) {
   const brand = getBrand((await params).brand);
   if (!brand) notFound();
   if (brand.comingSoon) {
-    // Rentalek sudah punya hero animasi; katalognya belum dibuka
-    if (brand.slug === "rentalek") {
+    // Rentalek: hero animasi bisa dinyalakan/dimatikan lewat content/landing/rentalek.ts
+    if (brand.slug === "rentalek" && rentalekLanding.hero.enabled) {
       const { hero } = rentalekLanding;
       return (
         <div data-brand={brand.slug} style={{ "--brand-accent": brand.accentColor }}>

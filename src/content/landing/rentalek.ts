@@ -17,6 +17,11 @@ const demoFrame = (n: number) =>
 
 export const rentalekLanding = {
   hero: {
+    /**
+     * true  = hero animasi tampil di atas tulisan "Coming soon".
+     * false = halaman Rentalek kembali hanya berisi "Coming soon".
+     */
+    enabled: false,
     frames: Array.from({ length: Math.ceil(DEMO_FRAME_TOTAL / FRAME_STRIDE) }, (_, i) =>
       demoFrame(i * FRAME_STRIDE + 1),
     ),

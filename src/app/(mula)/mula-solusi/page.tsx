@@ -66,7 +66,10 @@ export default function MulaSolusiPage() {
   };
 
   return (
-    <>
+    // Satu elemen akar: saat berpindah halaman, Next.js menggulir ke elemen PERTAMA
+    // halaman. Dengan Fragment (<>), elemen itu bisa jatuh ke footer dan halaman
+    // meluncur ke bawah.
+    <div>
       <MulaShell>
         <SiteNav />
 
@@ -99,6 +102,6 @@ export default function MulaSolusiPage() {
 
       {/* Di luar MulaShell: memakai token & font situs, sama persis dengan halaman lain */}
       <SiteFoot />
-    </>
+    </div>
   );
 }

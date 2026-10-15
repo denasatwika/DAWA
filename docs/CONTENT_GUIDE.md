@@ -85,7 +85,7 @@ npm run media:hero -- ~/Downloads/veo-rentalek.mp4 rentalek
 ```
 
 Skrip ini membuang audio, menjadikan hitam samar menjadi `#000` murni, membuat versi 16:9
-(lebar maks. 1280px) dan 9:16 (tinggi maks. 960px) dalam dua format, lalu mengambil frame terakhir
+(lebar maks. 1920px) dan 9:16 (tinggi maks. 1920px) dalam dua format, lalu mengambil frame terakhir
 sebagai poster. Hasilnya otomatis ditaruh di `public/media/brands/<slug>/hero/`:
 
 | File                                      | Untuk                                                        |
