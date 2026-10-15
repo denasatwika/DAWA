@@ -157,9 +157,10 @@
 }
 
 @media (max-width: 734px) and (orientation: portrait) {
+  /* Video tegak 4:5 (lihat scripts/prepare-hero.sh) */
   .stage[data-portrait] {
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 4 / 5;
     width: auto;
-    height: min(70svh, (100vw - 2 * var(--gutter)) * 16 / 9);
+    height: min(70svh, (100vw - 2 * var(--gutter)) * 5 / 4);
   }
 }

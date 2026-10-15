@@ -6,8 +6,8 @@ import type { BrandSlug } from "@/content/schema";
  *
  *   public/media/brands/<slug>/hero/landscape.mp4          16:9, H.264 (semua browser)
  *   public/media/brands/<slug>/hero/landscape-av1.mp4      16:9, AV1 (lebih kecil; browser modern)
- *   public/media/brands/<slug>/hero/portrait.mp4           9:16, H.264
- *   public/media/brands/<slug>/hero/portrait-av1.mp4       9:16, AV1
+ *   public/media/brands/<slug>/hero/portrait.mp4           4:5, H.264
+ *   public/media/brands/<slug>/hero/portrait-av1.mp4       4:5, AV1
  *   public/media/brands/<slug>/hero/landscape-end.webp     frame terakhir
  *   public/media/brands/<slug>/hero/portrait-end.webp
  *   public/media/brands/<slug>/products/<file>

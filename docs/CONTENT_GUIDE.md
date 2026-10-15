@@ -85,7 +85,7 @@ npm run media:hero -- ~/Downloads/veo-rentalek.mp4 rentalek
 ```
 
 Skrip ini membuang audio, menjadikan hitam samar menjadi `#000` murni, membuat versi 16:9
-(lebar maks. 1920px) dan 9:16 (tinggi maks. 1920px) dalam dua format, lalu mengambil frame terakhir
+(lebar maks. 1920px) dan 4:5 untuk ponsel (tinggi maks. 1920px) dalam dua format, lalu mengambil frame terakhir
 sebagai poster. Hasilnya otomatis ditaruh di `public/media/brands/<slug>/hero/`:
 
 | File                                      | Untuk                                                        |
@@ -109,7 +109,7 @@ Pastikan `hero.background` di file brand sama dengan warna latar video (default 
 Ketentuan video agar tampil baik:
 
 - Sepertiga atas frame kosong, karena judul hero berada di sana.
-- Objek utama di tengah secara horizontal, agar crop 9:16 tidak memotongnya.
+- Objek utama di tengah secara horizontal, agar crop 4:5 untuk ponsel tidak memotongnya.
 - Video berakhir pada frame produk yang utuh; video berhenti di frame ini, dan frame ini juga
   dipakai sebagai poster serta latar tile beranda.
 

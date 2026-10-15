@@ -11,7 +11,7 @@
 #
 # Hasil di public/media/brands/<slug>/hero/ (sesuai konvensi src/config/media.ts):
 #   landscape.mp4 / landscape-av1.mp4   16:9 untuk layar mendatar (lebar maks. 1920px)
-#   portrait.mp4  / portrait-av1.mp4    9:16 (crop tengah) untuk layar tegak (tinggi maks. 1920px)
+#   portrait.mp4  / portrait-av1.mp4    4:5 (crop tengah) untuk layar tegak (tinggi maks. 1920px)
 #   landscape-end.webp / portrait-end.webp   frame terakhir (poster)
 #
 # Dua format: AV1 (paling kecil, dipilih browser modern) dan H.264 (cadangan semua browser).
@@ -80,7 +80,9 @@ fi
 # (tidak pernah memperbesar video yang lebih kecil dari batas ini)
 readonly SCALE_WIDE="scale='min(1920,iw)':-2:flags=lanczos"
 readonly SCALE_TALL="scale=-2:'min(1920,ih)':flags=lanczos"
-if [[ -n "$CROP_X" ]]; then CROP="crop=ih*9/16:ih:${CROP_X}:0"; else CROP="crop=ih*9/16:ih"; fi
+# Potongan tegak 4:5 (bukan 9:16): lebih lebar, sehingga adegan close-up yang lebar
+# tidak terlalu banyak terpotong di ponsel. Lebar dibulatkan genap (syarat encoder).
+if [[ -n "$CROP_X" ]]; then CROP="crop=trunc(ih*4/5/2)*2:ih:${CROP_X}:0"; else CROP="crop=trunc(ih*4/5/2)*2:ih"; fi
 
 # CRF lebih kecil = kualitas lebih tinggi & file lebih besar.
 # AV1 30 / H.264 23 menjaga tekstur halus (diuji pada video hero Mula Solusi 1920×1080).
@@ -94,7 +96,7 @@ echo "› Landscape 16:9"
 encode "${BLACK}${SCALE_WIDE}" "${H264[@]}" "$OUT/landscape.mp4"
 encode "${BLACK}${SCALE_WIDE}" "${AV1[@]}" "$OUT/landscape-av1.mp4"
 
-echo "› Portrait 9:16"
+echo "› Portrait 4:5"
 encode "${BLACK}${CROP},${SCALE_TALL}" "${H264[@]}" "$OUT/portrait.mp4"
 encode "${BLACK}${CROP},${SCALE_TALL}" "${AV1[@]}" "$OUT/portrait-av1.mp4"
 
