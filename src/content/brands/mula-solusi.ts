@@ -85,6 +85,25 @@ export const mulaSolusi = defineBrand({
               { label: "Daya tahan baterai", value: "±6-12 jam" },
             ],
           },
+          {
+            id: "ht-wln",
+            summary: "UHF 400-470 MHz · 16 channel · ±6-12 jam",
+            name: "HT WL-N",
+            icon: "radio",
+            image: {
+              file: "ht-wln.webp",
+              alt: "Handy Talky WL-N hitam dengan antena pendek",
+            },
+            price: { amount: 8_000, unit: "/ unit / hari" },
+            specs: [
+              { label: "Jangkauan", value: "±1-5 km (tergantung kondisi lapangan)" },
+              { label: "Rentang frekuensi", value: "UHF 400-470 MHz" },
+              { label: "Jumlah saluran", value: "16 channel" },
+              { label: "Kapasitas baterai", value: "1.000 - 1.500 mAh (Li-ion)" },
+              { label: "Daya tahan baterai", value: "±6-12 jam" },
+              { label: "Kelengkapan", value: "Headset dan charger termasuk dalam paket sewa" },
+            ]
+          },
         ],
       },
       {
@@ -283,7 +302,7 @@ export const mulaSolusi = defineBrand({
             icon: "cable",
             price: cablePrice,
             image: {
-              file: "jack-jack.webp",
+              file: "jack-to-jack.webp",
               alt: "Kabel Jack 6,35 mm to Jack 6,35 mm",
             },
             specs: [
@@ -305,6 +324,18 @@ export const mulaSolusi = defineBrand({
               { label: "Jenis kabel", value: "HDMI" },
               { label: "Panjang kabel", value: "20 meter" },
             ],
+          },
+          {
+            id: "stop-kontak",
+            summary: "Stop kontak · 5-20 m",
+            name: "Stop Kontak",
+            icon: "monitor",
+            image: {
+              file: "stop-kontak.webp",
+              alt: "Stop Kontak",
+            },
+            price: cablePrice,
+            specs: [{ label: "Jenis konektor", value: "Stop kontak" }, cableLengths],
           },
         ],
       },
