@@ -274,7 +274,7 @@ export const mulaSolusi = defineBrand({
           {
             id: "kabel-jack-xlr",
             summary: "Jack 6,35 mm ke XLR · 5-20 m",
-            name: "Kabel Jack 6,35 mm to XLR",
+            name: "Kabel JACK to XLR",
             icon: "cable",
             image: {
               file: "jack-xlr.webp",
@@ -298,7 +298,7 @@ export const mulaSolusi = defineBrand({
           {
             id: "kabel-jack-jack",
             summary: "Jack 6,35 mm ke Jack · 5-20 m",
-            name: "Kabel Jack 6,35 mm to Jack 6,35 mm",
+            name: "Kabel JACK to JACK",
             icon: "cable",
             price: cablePrice,
             image: {
