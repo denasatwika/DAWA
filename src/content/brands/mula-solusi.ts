@@ -88,7 +88,7 @@ export const mulaSolusi = defineBrand({
           {
             id: "ht-wln",
             summary: "UHF 400-470 MHz · 16 channel · ±6-12 jam",
-            name: "HT WL-N",
+            name: "HT WLN",
             icon: "radio",
             image: {
               file: "ht-wln.webp",
